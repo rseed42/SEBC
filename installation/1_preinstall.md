@@ -10,6 +10,8 @@ Checked default vm.swappiness config:
 echo "vm.swappiness=1" >> /etc/sysctl.conf
 
 
+Property not changed after boot
+
 -> Unable to set swappiness via /etc/sysctl.conf
 
 
@@ -52,26 +54,7 @@ Check mounts
 
 ## Reserved disk space
 
-[root@ip-172-31-22-192 ~]# tune2fs -l /dev/xvde2 | grep "Reserved block count"
-Reserved block count:     1572864
-
-Tune the reserved space:
-
-tune2fs -m 0 /dev/xvde2
-
-- After tuning:
-
-[root@ip-172-31-16-142 ~]# tune2fs -l /dev/xvde2 | grep "Reserved block count"
-Reserved block count:     0
-
-[root@ip-172-31-22-192 ~]# tune2fs -l /dev/xvde2 | grep "Reserved block count"
-Reserved block count:     0
-
-[root@ip-172-31-26-157 ~]# tune2fs -l /dev/xvde2 | grep "Reserved block count"
-Reserved block count:     0
-
-[root@ip-172-31-22-31 ~]# tune2fs -l /dev/xvde2 | grep "Reserved block count"
-Reserved block count:     0
+CentOS 7 image shipped with XFS filesystem. The standard tune2fs doesn't work for that.
 
 
 ## Transparent hugepages
