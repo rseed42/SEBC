@@ -1,0 +1,24 @@
+#!/bin/bash
+URL=http://localhost:7180/api/v1
+
+# List clusters
+#curl -u admin:admin 'http://localhost:7180/api/v2/cm/deployment'
+
+# List services
+#curl -u admin:admin http://localhost:7180/api/v1/clusters/rseed42/services
+
+# Show Hive Configuration
+#curl -u admin:admin "$URL/clusters/rseed42/services/hive/config"
+
+# Stop Hive
+#curl -X POST -u admin:admin "$URL/clusters/rseed42/services/hive/commands/stop"
+
+# Start Hive
+#curl -X POST -u admin:admin "$URL/clusters/rseed42/services/hive/commands/start"
+
+CMD_ID=591
+
+# Check finished commands
+curl -u admin:admin "$URL/commands/$CMD_ID"
+
+
