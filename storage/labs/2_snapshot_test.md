@@ -29,7 +29,9 @@ rm: The directory /user/rseed42/precious cannot be deleted since /user/rseed42/p
 
 Delete zip file
 
+```
 hdfs dfs -rm -skipTrash /user/rseed42/precious/SEBC.tar.gz
+```
 
 Check snapshots
 
