@@ -81,7 +81,18 @@ Only one partition in this installation
 
 ## Transparent hugepages
 
-Turned off transparent hugepages
+Turned off transparent hugepages:
+
+Changed /etc/rc.d/rc.local
+
+```
+if test -f /sys/kernel/mm/transparent_hugepage/enabled; then
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+fi
+if test -f /sys/kernel/mm/transparent_hugepage/defrag; then
+echo never > /sys/kernel/mm/transparent_hugepage/defrag
+fi
+```
 
 ```
 [centos@ip-172-31-23-134 ~]$ cat /sys/kernel/mm/transparent_hugepage/enabled
