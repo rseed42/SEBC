@@ -2,13 +2,16 @@
 
 Checked default vm.swappiness config:
 
+```
 [root@ip-172-31-23-134 mysql-connector-java-5.1.40]# cat /proc/sys/vm/swappiness
 30
+```
 
 -> Changing swappiness:
 
+```
 echo "vm.swappiness=1" >> /etc/sysctl.conf
-
+```
 
 Property not changed after boot
 
@@ -18,9 +21,10 @@ Property not changed after boot
 ## Mount options
 
 One node example:
-
+```
 cat /etc/fstab
-
+```
+```
 [root@ip-172-31-23-134 ~]# cat /etc/fstab
 
 #
@@ -31,11 +35,13 @@ cat /etc/fstab
 # See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
 #
 UUID=ef6ba050-6cdc-416a-9380-c14304d0d206 /                       xfs     defaults,noatime        0 0
+```
 
 -> Added noatime attribtue
 
 Check mounts
 
+```
 [root@ip-172-31-23-134 ~]# mount |grep xvda
 /dev/xvda1 on / type xfs (rw,noatime,seclabel,attr2,inode64,noquota)
 
@@ -50,7 +56,7 @@ Check mounts
 
 [root@ip-172-31-28-101 ~]# mount |grep xvda
 /dev/xvda1 on / type xfs (rw,noatime,seclabel,attr2,inode64,noquota)
-
+```
 
 ## Reserved disk space
 
@@ -61,6 +67,7 @@ CentOS 7 image shipped with XFS filesystem. The standard tune2fs doesn't work fo
 
 Turned off transparent hugepages
 
+```
 [centos@ip-172-31-23-134 ~]$ cat /sys/kernel/mm/transparent_hugepage/enabled
 always madvise [never]
 
@@ -75,24 +82,19 @@ always madvise [never]
 
 [root@ip-172-31-28-101 ~]# cat /sys/kernel/mm/transparent_hugepage/enabled
 always madvise [never]
-
+```
 
 ## nslookup
 
 Install utilities:
 
+```
 yum install -y bind-utils
-
-Updated /etc/hosts for easy access
-
-54.157.150.141 master
-54.204.195.169 edge
-54.145.151.130 dn01
-54.86.221.36 dn02
-54.175.89.35 dn03
+```
 
 Lookup a host (test):
 
+```
 [root@ip-172-31-23-134 ~]# nslookup ec2-54-204-195-169.compute-1.amazonaws.com
 Server:         172.31.0.2
 Address:        172.31.0.2#53
@@ -100,23 +102,17 @@ Address:        172.31.0.2#53
 Non-authoritative answer:
 Name:   ec2-54-204-195-169.compute-1.amazonaws.com
 Address: 172.31.25.204
+```
 
-
+```
 [root@ip-172-31-23-134 ~]# getent hosts
 127.0.0.1       localhost localhost.localdomain localhost4 localhost4.localdomain4
 127.0.0.1       localhost localhost.localdomain localhost6 localhost6.localdomain6
-54.157.150.141  master
-54.204.195.169  edge
-54.145.151.130  dn01
-54.86.221.36    dn02
-54.175.89.35    dn03
-
-
-
-[root@ip-172-31-16-142 ~]#
+```
 
 ## network attributes
 
+```
 [root@ip-172-31-23-134 ~]# ifconfig
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
         inet 172.31.23.134  netmask 255.255.240.0  broadcast 172.31.31.255
@@ -211,7 +207,7 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 6  bytes 416 (416.0 B)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
+```
 
 
 ## nscd
@@ -224,6 +220,7 @@ service nscd start
 
 service nscd status
 
+```
 [root@ip-172-31-23-134 ~]# service nscd status
 Redirecting to /bin/systemctl status  nscd.service
 ● nscd.service - Name Service Cache Daemon
@@ -270,21 +267,24 @@ Redirecting to /bin/systemctl status  nscd.service
  Main PID: 9179 (nscd)
    CGroup: /system.slice/nscd.service
            └─9179 /usr/sbin/nscd
-		   
+``` 
 	   
 
 
 
 ## ntpd [All nodes]
 
+```
 yum install -y ntp
 chkconfig ntpd on
 service ntpd start
+```
 
-
+```
 service ntpd status
+```
 
-
+```
 [root@ip-172-31-23-134 ~]# service ntpd status
 Redirecting to /bin/systemctl status  ntpd.service
 ● ntpd.service - Network Time Service
@@ -334,7 +334,7 @@ Redirecting to /bin/systemctl status  ntpd.service
  Main PID: 9281 (ntpd)
    CGroup: /system.slice/ntpd.service
            └─9281 /usr/sbin/ntpd -u ntp:ntp -g
-
+```
 		   
 		   
 		   
