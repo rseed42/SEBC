@@ -15,8 +15,16 @@ echo "vm.swappiness=1" >> /etc/sysctl.conf
 
 Property not changed after boot
 
--> Unable to set swappiness via /etc/sysctl.conf
+-> Turned off tuned daemon
 
+```
+chkconfig tuned off
+```
+
+```
+[centos@ip-172-31-23-134 ~]$ cat /proc/sys/vm/swappiness
+1
+```
 
 ## Mount options
 
@@ -60,7 +68,15 @@ Check mounts
 
 ## Reserved disk space
 
-CentOS 7 image shipped with XFS filesystem. The standard tune2fs doesn't work for that.
+CentOS 7 image shipped with the XFS filesystem. The standard tune2fs doesn't work for that.
+
+```
+[root@ip-172-31-28-101 ~]# xfs_io -x -c "resblks" /
+reserved blocks = 8192
+available reserved blocks = 8192
+```
+
+Only one partition in this installation
 
 
 ## Transparent hugepages
