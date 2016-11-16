@@ -1,0 +1,13 @@
+#!/bin/bash
+EXAMPLE_DIR=/opt/cloudera/parcels/CDH/lib/hadoop-mapreduce
+BLOCK_SIZE=33554432
+DATASET_SIZE=107374182
+MAPPER_COUNT=4
+STORE_PATH=/user/rseed42/perf_dataset
+
+hdfs dfs -rm -r -skipTrash $STORE_PATH
+time hadoop jar $EXAMPLE_DIR/hadoop-mapreduce-examples.jar teragen \
+-Dmapreduce.job.maps=$MAPPER_COUNT \
+-Ddfs.block.size=$BLOCK_SIZE \
+$DATASET_SIZE \
+$STORE_PATH
