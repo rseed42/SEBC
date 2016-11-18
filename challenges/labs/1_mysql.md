@@ -121,10 +121,8 @@ mysql> show grants for 'scm';
 +----------------------------------------------------------------------------------------------------+
 | GRANT USAGE ON *.* TO 'scm'@'%' IDENTIFIED BY PASSWORD '*45E6E3C68BDF1AC7EBB5C5A3BCBD5E9437B293BE' |
 | GRANT ALL PRIVILEGES ON `scm`.* TO 'scm'@'%'                                                       |
-| GRANT ALL PRIVILEGES ON `sentry`.* TO 'scm'@'%'                                                    |
-| GRANT ALL PRIVILEGES ON `hue`.* TO 'scm'@'%'                                                       |
 +----------------------------------------------------------------------------------------------------+
-4 rows in set (0.01 sec)
+2 rows in set (0.00 sec)
 
 mysql> show grants for 'rman';
 +-----------------------------------------------------------------------------------------------------+
