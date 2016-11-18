@@ -109,7 +109,7 @@ social:x:2802:bavaria
 ### Tweak OS settings
 
 
-Swappiness
+#### Swappiness
 
 Check
 ```
@@ -123,18 +123,60 @@ echo 'vm.swappiness = 1' >> /etc/sysctl.conf
 ```
 
 
-Check Again
+Check again (after reboot later)
+```
+[ec2-user@ip-172-31-1-36 ~]$ cat /proc/sys/vm/swappiness
+1
+
 ```
 
+#### Transparent Hugepages
+
+Check
+```
+cat /sys/kernel/mm/transparent_hugepage/enabled
+[always] madvise never
+```
+Add in /etc/rc.local:
+```
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+```
+Check again (after reboot later)
+```
+[ec2-user@ip-172-31-1-36 ~]$ cat /sys/kernel/mm/transparent_hugepage/enabled
+always madvise [never]
 ```
 
+#### Service nscd
 
+Service nscd is not installed
 
+```
+yum install -y nscd
+```
 
+Enable on startup
+```
+chkconfig nscd on
+```
 
+Start
+```
+service nscd start
+```
 
+### Service ntpd
 
+Service ntpd is not enabled on start
+```
+chkconfig ntpd on
+```
+Start
+```
+service ntpd start
+```
 
+### Reboot to make sure everything is set up fine
 
 
 
